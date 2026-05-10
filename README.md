@@ -54,7 +54,7 @@ This project is a **low-risk static site design** for class use, not a claim of 
 2. Open `index.html` in a modern browser.
 
 ## 10. Published Game Link
-https://cybercryptonic.github.io/digital-toolbox-game/
+https://cybercryptonic.github.io/firewall-defender/
 
 ## 11. Recommended Manual QA Checklist
 1. Open `index.html` and verify the mission briefing appears with no console errors.
