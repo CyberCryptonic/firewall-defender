@@ -240,5 +240,20 @@ function startGame() {
 
 document.getElementById('startBtn').addEventListener('click', startGame);
 muteBtn.addEventListener('click', () => { muted = !muted; muteBtn.textContent = `Sound: ${muted ? 'Off' : 'On'}`; });
-document.addEventListener('keydown', e => { keys[e.key.toLowerCase()] = true; });
-document.addEventListener('keyup', e => { keys[e.key.toLowerCase()] = false; });
+const movementKeys = new Set(['w', 'a', 's', 'd', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright']);
+
+document.addEventListener('keydown', e => {
+  const key = e.key.toLowerCase();
+  if (movementKeys.has(key)) e.preventDefault();
+  keys[key] = true;
+});
+
+document.addEventListener('keyup', e => {
+  const key = e.key.toLowerCase();
+  if (movementKeys.has(key)) e.preventDefault();
+  keys[key] = false;
+});
+
+window.addEventListener('blur', () => {
+  Object.keys(keys).forEach(k => { keys[k] = false; });
+});
