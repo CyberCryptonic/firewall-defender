@@ -8,32 +8,39 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <div class="bg-noise" aria-hidden="true"></div>
   <div class="cyber-grid" aria-hidden="true"></div>
+  <div class="network-lines" aria-hidden="true"></div>
+
   <div class="app-shell">
     <header class="title-panel glass">
-      <h1>Firewall Defender: Cyber Breach</h1>
-      <p>Defend the campus network. Contain malware. Secure the core.</p>
+      <p class="eyebrow">Cybersecurity Simulation // Campus Network Defense</p>
+      <h1>Firewall Defender<span class="subtitle">: Cyber Breach</span></h1>
+      <p class="title-copy">Contain active threats, recover security assets, and seal each zone before the breach spreads.</p>
     </header>
 
     <main>
       <section id="startScreen" class="screen active glass center">
-        <h2>Mission Briefing</h2>
-        <p>Collect every security asset in each zone, avoid malware, and unlock the server exit.</p>
-        <ul>
-          <li><strong>Move:</strong> WASD or Arrow Keys</li>
-          <li><strong>Lives:</strong> 3</li>
-          <li><strong>Goal:</strong> Collect all assets → reach unlocked server</li>
-        </ul>
-        <button id="startBtn" class="btn">Start Defense</button>
+        <div class="briefing-head">
+          <h2>Mission Briefing</h2>
+          <span class="status-pill">Live Threat</span>
+        </div>
+        <p class="briefing-copy">You are the last active cyber defender. Sweep each sector, collect every required asset, then route to the secured server exit.</p>
+        <div class="briefing-grid">
+          <div class="briefing-card"><strong>Movement</strong><span>WASD / Arrow Keys</span></div>
+          <div class="briefing-card"><strong>Integrity</strong><span>3 Lives per Run</span></div>
+          <div class="briefing-card"><strong>Protocol</strong><span>Collect Assets → Unlock Exit</span></div>
+        </div>
+        <button id="startBtn" class="btn cta">Start Defense</button>
       </section>
 
       <section id="gameScreen" class="screen glass">
         <div class="hud glass">
-          <div>Level <span id="hudLevel">1</span></div>
-          <div id="hudLevelName">Network Login</div>
-          <div>Lives <span id="hudLives">3</span></div>
-          <div>Score <span id="hudScore">0</span></div>
-          <div>Assets <span id="hudItems">0/0</span></div>
+          <div class="hud-cell"><span class="hud-label">Level</span><span id="hudLevel" class="hud-value">1</span></div>
+          <div class="hud-cell objective"><span class="hud-label">Objective</span><span id="hudLevelName" class="hud-value">Network Login</span></div>
+          <div class="hud-cell"><span class="hud-label">Lives</span><span id="hudLives" class="hud-value">3</span></div>
+          <div class="hud-cell"><span class="hud-label">Score</span><span id="hudScore" class="hud-value">0</span></div>
+          <div class="hud-cell"><span class="hud-label">Assets</span><span id="hudItems" class="hud-value">0/0</span></div>
           <button id="muteBtn" class="btn tiny" type="button">Sound: On</button>
         </div>
         <canvas id="gameCanvas" width="960" height="600" aria-label="Firewall Defender game"></canvas>
