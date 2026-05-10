@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Firewall Defender: Cyber Breach</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="top-bar">
+      <h1>Firewall Defender: Cyber Breach</h1>
+      <p class="subtitle">Protect the school network from a full-scale cyberattack.</p>
+    </header>
+
+    <main>
+      <section id="startScreen" class="screen active">
+        <h2>Mission Briefing</h2>
+        <p>
+          Malware has breached the campus network. Collect security assets, avoid hostile code,
+          and reach the secured server in each zone.
+        </p>
+        <ul class="brief-list">
+          <li><strong>Move:</strong> WASD or Arrow Keys</li>
+          <li><strong>Lives:</strong> 3 total</li>
+          <li><strong>Goal:</strong> Collect required items, then reach the glowing server</li>
+        </ul>
+        <button id="startBtn" class="btn primary">Start Defense</button>
+      </section>
+
+      <section id="gameScreen" class="screen">
+        <div class="hud">
+          <div>Level: <span id="hudLevel">1</span></div>
+          <div>Lives: <span id="hudLives">3</span></div>
+          <div>Score: <span id="hudScore">0</span></div>
+          <div>Collected: <span id="hudItems">0/0</span></div>
+        </div>
+        <div class="level-info">
+          <h3 id="levelName"></h3>
+          <p id="levelDesc"></p>
+        </div>
+        <canvas id="gameCanvas" width="840" height="560" aria-label="Game area"></canvas>
+        <div id="messageBox" class="message-box"></div>
+      </section>
+
+      <section id="gameOverScreen" class="screen">
+        <h2>System Compromised</h2>
+        <p>The malware overwhelmed your defenses.</p>
+        <p class="final-score">Final Score: <span id="gameOverScore">0</span></p>
+        <button id="restartBtn" class="btn danger">Restart Mission</button>
+      </section>
+
+      <section id="winScreen" class="screen">
+        <h2>Network Secured!</h2>
+        <p>You blocked the breach and restored the school systems.</p>
+        <p class="final-score">Final Score: <span id="winScore">0</span></p>
+        <button id="playAgainBtn" class="btn success">Play Again</button>
+      </section>
+    </main>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
