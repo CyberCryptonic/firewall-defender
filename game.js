@@ -36,7 +36,11 @@ const levels = [
 
 const rectHit = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
 
-function setScreen(name) { Object.values(screens).forEach(s => s.classList.remove('active')); screens[name].classList.add('active'); }
+function setScreen(name) {
+  Object.values(screens).forEach(s => s.classList.remove('active'));
+  screens[name].classList.add('active');
+  document.body.classList.toggle('start-mode', name === 'start');
+}
 function tone(freq, time = 0.09) { if (muted) return; audioCtx ||= new (window.AudioContext || window.webkitAudioContext)(); const o = audioCtx.createOscillator(); const g = audioCtx.createGain(); o.frequency.value = freq; o.type = 'triangle'; o.connect(g); g.connect(audioCtx.destination); g.gain.value = 0.04; o.start(); o.stop(audioCtx.currentTime + time); }
 function showOverlay(title, text, btnText, onClick) { awaitingContinue = true; overlay.title.textContent = title; overlay.text.textContent = text; overlay.button.textContent = btnText; overlay.root.classList.remove('hidden'); overlay.button.onclick = () => { awaitingContinue = false; overlay.root.classList.add('hidden'); onClick(); }; }
 
@@ -252,3 +256,6 @@ document.addEventListener('keyup', e => {
 window.addEventListener('blur', () => {
   Object.keys(keys).forEach(k => { keys[k] = false; });
 });
+
+
+setScreen('start');
