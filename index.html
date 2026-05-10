@@ -3,60 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none';" />
   <title>Firewall Defender: Cyber Breach</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="app">
-    <header class="top-bar">
+  <div class="cyber-grid" aria-hidden="true"></div>
+  <div class="app-shell">
+    <header class="title-panel glass">
       <h1>Firewall Defender: Cyber Breach</h1>
-      <p class="subtitle">Protect the school network from a full-scale cyberattack.</p>
+      <p>Defend the campus network. Contain malware. Secure the core.</p>
     </header>
 
     <main>
-      <section id="startScreen" class="screen active">
+      <section id="startScreen" class="screen active glass center">
         <h2>Mission Briefing</h2>
-        <p>
-          Malware has breached the campus network. Collect security assets, avoid hostile code,
-          and reach the secured server in each zone.
-        </p>
-        <ul class="brief-list">
+        <p>Collect every security asset in each zone, avoid malware, and unlock the server exit.</p>
+        <ul>
           <li><strong>Move:</strong> WASD or Arrow Keys</li>
-          <li><strong>Lives:</strong> 3 total</li>
-          <li><strong>Goal:</strong> Collect required items, then reach the glowing server</li>
+          <li><strong>Lives:</strong> 3</li>
+          <li><strong>Goal:</strong> Collect all assets → reach unlocked server</li>
         </ul>
-        <button id="startBtn" class="btn primary">Start Defense</button>
+        <button id="startBtn" class="btn">Start Defense</button>
       </section>
 
-      <section id="gameScreen" class="screen">
-        <div class="hud">
-          <div>Level: <span id="hudLevel">1</span></div>
-          <div>Lives: <span id="hudLives">3</span></div>
-          <div>Score: <span id="hudScore">0</span></div>
-          <div>Collected: <span id="hudItems">0/0</span></div>
+      <section id="gameScreen" class="screen glass">
+        <div class="hud glass">
+          <div>Level <span id="hudLevel">1</span></div>
+          <div id="hudLevelName">Network Login</div>
+          <div>Lives <span id="hudLives">3</span></div>
+          <div>Score <span id="hudScore">0</span></div>
+          <div>Assets <span id="hudItems">0/0</span></div>
+          <button id="muteBtn" class="btn tiny" type="button">Sound: On</button>
         </div>
-        <div class="level-info">
-          <h3 id="levelName"></h3>
-          <p id="levelDesc"></p>
-        </div>
-        <canvas id="gameCanvas" width="840" height="560" aria-label="Game area"></canvas>
-        <div id="messageBox" class="message-box"></div>
-      </section>
-
-      <section id="gameOverScreen" class="screen">
-        <h2>System Compromised</h2>
-        <p>The malware overwhelmed your defenses.</p>
-        <p class="final-score">Final Score: <span id="gameOverScore">0</span></p>
-        <button id="restartBtn" class="btn danger">Restart Mission</button>
-      </section>
-
-      <section id="winScreen" class="screen">
-        <h2>Network Secured!</h2>
-        <p>You blocked the breach and restored the school systems.</p>
-        <p class="final-score">Final Score: <span id="winScore">0</span></p>
-        <button id="playAgainBtn" class="btn success">Play Again</button>
+        <canvas id="gameCanvas" width="960" height="600" aria-label="Firewall Defender game"></canvas>
       </section>
     </main>
+  </div>
+
+  <div id="overlay" class="overlay hidden">
+    <div class="overlay-card glass center">
+      <h2 id="overlayTitle">Level Intro</h2>
+      <p id="overlayText">Text</p>
+      <button id="overlayBtn" class="btn">Continue</button>
+    </div>
   </div>
 
   <script src="game.js"></script>
