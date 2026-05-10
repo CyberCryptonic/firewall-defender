@@ -54,7 +54,8 @@ function spawnPickupBurst(x, y, color) {
 function loadLevel() {
   const lv = levels[state.levelIndex];
   state.player = { x: lv.start.x, y: lv.start.y, w: 24, h: 24, speed: lv.playerSpeed ?? 3.2, collected: 0 };
-  state.collectibles = lv.collectibles.map(c => ({ x: c.x, y: c.y, w: 16, h: 16, type: Math.random() > 0.5 ? 'chip' : 'key' }));
+  // Keep collectible data uniform so every level renders the same key icon style.
+  state.collectibles = lv.collectibles.map(c => ({ x: c.x, y: c.y, w: 16, h: 16 }));
   state.enemies = lv.enemies.map(e => ({ ...e }));
   state.traps = lv.traps.map(t => ({ ...t }));
   state.exit = { x: lv.exit.x, y: lv.exit.y, w: 34, h: 34, active: false };
