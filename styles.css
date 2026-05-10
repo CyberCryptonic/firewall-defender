@@ -19,6 +19,25 @@ body { margin: 0; font-family: "Segoe UI", Inter, system-ui, sans-serif; backgro
 @keyframes drift { from { transform: translateY(0); } to { transform: translateY(42px); } }
 @keyframes rotate { to { transform: rotate(360deg); } }
 .app-shell { max-width: 1100px; margin: 0 auto; padding: 18px; position: relative; z-index: 2; }
+
+body.start-mode .app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+body.start-mode main {
+  width: 100%;
+}
+
+body.start-mode .title-panel,
+body.start-mode #startScreen {
+  width: min(100%, 920px);
+}
 .glass { backdrop-filter: blur(9px); background: var(--panel); border: 1px solid var(--line); box-shadow: 0 0 28px rgba(57,181,255,.18), inset 0 0 24px rgba(57,181,255,.04); border-radius: 16px; }
 .title-panel { text-align: center; padding: 18px 18px 14px; margin-bottom: 14px; }
 .eyebrow { margin: 0 0 6px; font-size: .75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); }
