@@ -138,22 +138,17 @@ function drawCollectible(c) {
   ctx.translate(c.x + 8, c.y + 8);
   ctx.shadowBlur = 12 + pulse * 8;
   ctx.shadowColor = '#63ffb2';
-  if (c.type === 'chip') {
-    ctx.fillStyle = '#63ffb2';
-    ctx.fillRect(-8, -8, 16, 16);
-    ctx.strokeStyle = '#d5ffea';
-    ctx.lineWidth = 1.2;
-    ctx.strokeRect(-6, -6, 12, 12);
-  } else {
-    ctx.strokeStyle = '#7ef7ff';
-    ctx.lineWidth = 3;
-    ctx.beginPath();
-    ctx.arc(-3, -1, 5, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.fillStyle = '#7ef7ff';
-    ctx.fillRect(1, -2, 8, 4);
-    ctx.fillRect(7, -5, 2, 3);
-  }
+
+  // Render every collectible as the same security key icon, regardless of internal type.
+  ctx.strokeStyle = '#7ef7ff';
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.arc(-3, -1, 5, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.fillStyle = '#7ef7ff';
+  ctx.fillRect(1, -2, 8, 4);
+  ctx.fillRect(7, -5, 2, 3);
+
   ctx.restore();
 }
 
