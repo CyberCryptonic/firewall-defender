@@ -1,0 +1,82 @@
+:root {
+  --bg: #070b14;
+  --panel: #0f1826;
+  --line: #20334d;
+  --text: #e9f6ff;
+  --neon-blue: #1aa9ff;
+  --neon-green: #49ff9d;
+  --neon-red: #ff3a57;
+  --neon-yellow: #ffd54a;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  background: radial-gradient(circle at top, #101d31, var(--bg) 55%);
+  color: var(--text);
+}
+.app { max-width: 980px; margin: 0 auto; padding: 20px; }
+.top-bar { text-align: center; margin-bottom: 14px; }
+h1 { margin: 0; color: var(--neon-green); text-shadow: 0 0 14px rgba(73,255,157,.45); }
+.subtitle { margin-top: 6px; opacity: .9; }
+.screen {
+  display: none;
+  border: 1px solid var(--line);
+  background: rgba(10, 19, 33, 0.9);
+  border-radius: 12px;
+  padding: 22px;
+  box-shadow: 0 0 22px rgba(26,169,255,.12);
+}
+.screen.active { display: block; }
+.btn {
+  margin-top: 14px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform .15s ease, box-shadow .2s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+.primary { background: linear-gradient(135deg, #1786ff, #10b5ff); box-shadow: 0 0 14px rgba(26,169,255,.5); }
+.danger { background: linear-gradient(135deg, #d12946, #ff3a57); }
+.success { background: linear-gradient(135deg, #12a86d, #49ff9d); color: #042413; }
+.hud {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.hud div {
+  padding: 8px;
+  background: #0f2238;
+  border: 1px solid #234566;
+  border-radius: 8px;
+  text-align: center;
+}
+.level-info h3 { margin: 6px 0 2px; color: var(--neon-blue); }
+.level-info p { margin: 0 0 10px; opacity: .9; }
+#gameCanvas {
+  width: 100%;
+  border: 1px solid #2f4b70;
+  border-radius: 10px;
+  display: block;
+  background: #06101d;
+}
+.message-box {
+  min-height: 26px;
+  margin-top: 10px;
+  font-weight: 600;
+  color: var(--neon-yellow);
+}
+.warning-flash {
+  animation: warningFlash .35s ease;
+}
+@keyframes warningFlash {
+  0%,100% { box-shadow: 0 0 0 rgba(255,58,87,0); }
+  50% { box-shadow: 0 0 18px rgba(255,58,87,.9); }
+}
+.brief-list { text-align: left; display: inline-block; margin-top: 8px; }
+.final-score { font-size: 1.2rem; color: var(--neon-yellow); }
