@@ -56,13 +56,3 @@ This project is a **low-risk static site design** for class use, not a claim of 
 ## 10. Published Game Link
 https://cybercryptonic.github.io/firewall-defender/
 
-## 11. Recommended Manual QA Checklist
-1. Open `index.html` and verify the mission briefing appears with no console errors.
-2. Start game and confirm HUD values initialize correctly (Level 1, 3 lives, score 0).
-3. In each level, verify exit is locked until all required collectibles are gathered.
-4. Intentionally collide with malware/traps and confirm lives decrease and player resets.
-5. Lose all lives and verify **System Compromised** overlay appears and restart works.
-6. Complete Levels 1–4 and verify progression overlay appears and loads the next level.
-7. Complete Level 5 and verify final victory overlay appears with **Play Again**.
-8. Use **Play Again** and verify run resets to Level 1 with fresh lives and score.
-9. Toggle sound button and verify label updates between `Sound: On` and `Sound: Off`.
