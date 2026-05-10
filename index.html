@@ -8,10 +8,11 @@
   <title>Firewall Defender: Cyber Breach</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+<body class="start-mode">
   <div class="bg-noise" aria-hidden="true"></div>
   <div class="cyber-grid" aria-hidden="true"></div>
   <div class="network-lines" aria-hidden="true"></div>
+  <div class="scanline-overlay" aria-hidden="true"></div>
 
   <div class="app-shell">
     <header class="title-panel glass">
@@ -26,7 +27,26 @@
           <h2>Mission Briefing</h2>
           <span class="status-pill">Live Threat</span>
         </div>
+
+        <p class="startup-bootline">SYSTEM BOOT SEQUENCE // MISSION CONSOLE READY</p>
+
+        <div class="status-grid" aria-label="System Status Indicators">
+          <div class="status-card"><span>Firewall Core</span><strong class="ok">Online</strong></div>
+          <div class="status-card"><span>Threat Level</span><strong class="warn">Active</strong></div>
+          <div class="status-card"><span>Encryption</span><strong class="ok">Armed</strong></div>
+          <div class="status-card"><span>Network Integrity</span><strong class="alert">Unstable</strong></div>
+        </div>
+
         <p class="briefing-copy">You are the last active cyber defender. Sweep each sector, collect every required asset, then route to the secured server exit.</p>
+
+        <div class="terminal-log" role="presentation" aria-hidden="true">
+          <p><span class="tag ok">[OK]</span> Firewall kernel loaded</p>
+          <p><span class="tag ok">[OK]</span> Defender module armed</p>
+          <p><span class="tag warn">[WARN]</span> Malware signatures detected</p>
+          <p><span class="tag lock">[LOCKED]</span> Secure server awaiting authentication</p>
+          <p><span class="tag info">[READY]</span> Launch command accepted<span class="cursor">_</span></p>
+        </div>
+
         <div class="briefing-grid">
           <div class="briefing-card"><strong>Movement</strong><span>WASD / Arrow Keys</span></div>
           <div class="briefing-card"><strong>Integrity</strong><span>3 Lives per Run</span></div>
