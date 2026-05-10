@@ -24,14 +24,14 @@ let running = false;
 let awaitingContinue = false;
 let frame = 0;
 
-const state = { levelIndex: 0, lives: 3, score: 0, player: null, collectibles: [], enemies: [], traps: [], particles: [], hitPulse: 0, exit: null };
+const state = { levelIndex: 0, lives: 3, score: 0, player: null, collectibles: [], enemies: [], traps: [], particles: [], hitPulse: 0, damageCooldown: 0, exit: null };
 
 const levels = [
-  { name: 'Network Login', mission: 'Collect 2 security keys and reach the secure uplink.', start: { x: 42, y: 42 }, required: 2, walls: [{ x: 250, y: 80, w: 20, h: 420 }], collectibles: [{ x: 130, y: 110 }, { x: 820, y: 500 }], enemies: [{ x: 640, y: 140, r: 13, vx: 0, vy: 1.4, minY: 100, maxY: 520 }], traps: [], exit: { x: 900, y: 540 } },
-  { name: 'Malware Maze', mission: 'Collect 3 patches through guarded channels.', start: { x: 35, y: 35 }, required: 3, walls: [{ x: 140, y: 60, w: 20, h: 500 }, { x: 320, y: 0, w: 20, h: 380 }, { x: 500, y: 220, w: 20, h: 380 }, { x: 680, y: 0, w: 20, h: 360 }], collectibles: [{ x: 80, y: 530 }, { x: 430, y: 110 }, { x: 860, y: 120 }], enemies: [{ x: 220, y: 470, r: 13, vx: 1.8, vy: 0, minX: 170, maxX: 620 }, { x: 860, y: 360, r: 13, vx: 0, vy: 2, minY: 80, maxY: 520 }], traps: [], exit: { x: 900, y: 40 } },
-  { name: 'Phishing Storm', mission: 'Avoid trap nodes and collect 3 safe packets.', start: { x: 50, y: 520 }, required: 3, walls: [{ x: 240, y: 0, w: 20, h: 350 }, { x: 470, y: 250, w: 20, h: 350 }, { x: 720, y: 0, w: 20, h: 360 }], collectibles: [{ x: 90, y: 90 }, { x: 550, y: 100 }, { x: 860, y: 520 }], enemies: [{ x: 610, y: 520, r: 13, vx: 2.5, vy: 0, minX: 500, maxX: 900 }, { x: 860, y: 120, r: 13, vx: 0, vy: 2.6, minY: 80, maxY: 500 }], traps: [{ x: 320, y: 430, w: 36, h: 36 }, { x: 580, y: 290, w: 36, h: 36 }, { x: 780, y: 430, w: 36, h: 36 }], exit: { x: 902, y: 42 } },
-  { name: 'Patch Rush', mission: 'High pressure zone: collect 4 assets quickly.', start: { x: 35, y: 300 }, required: 4, walls: [{ x: 170, y: 0, w: 20, h: 410 }, { x: 360, y: 170, w: 20, h: 430 }, { x: 560, y: 0, w: 20, h: 380 }, { x: 760, y: 180, w: 20, h: 420 }], collectibles: [{ x: 90, y: 70 }, { x: 300, y: 520 }, { x: 630, y: 120 }, { x: 880, y: 500 }], enemies: [{ x: 270, y: 130, r: 13, vx: 2.7, vy: 0, minX: 210, maxX: 520 }, { x: 660, y: 510, r: 13, vx: 0, vy: -2.8, minY: 240, maxY: 550 }, { x: 890, y: 100, r: 13, vx: 0, vy: 3, minY: 60, maxY: 520 }], traps: [{ x: 430, y: 100, w: 36, h: 36 }], exit: { x: 905, y: 45 } },
-  { name: 'Core Lockdown', mission: 'Final sector: collect 4 assets and secure the network core.', start: { x: 40, y: 40 }, required: 4, walls: [{ x: 120, y: 0, w: 20, h: 350 }, { x: 280, y: 200, w: 20, h: 400 }, { x: 440, y: 0, w: 20, h: 330 }, { x: 600, y: 210, w: 20, h: 390 }, { x: 760, y: 0, w: 20, h: 330 }], collectibles: [{ x: 80, y: 520 }, { x: 360, y: 100 }, { x: 680, y: 500 }, { x: 890, y: 130 }], enemies: [{ x: 210, y: 520, r: 13, vx: 2.8, vy: 0, minX: 150, maxX: 420 }, { x: 520, y: 80, r: 13, vx: -2.8, vy: 0, minX: 460, maxX: 900 }, { x: 870, y: 520, r: 13, vx: 0, vy: -3.1, minY: 250, maxY: 550 }, { x: 900, y: 150, r: 13, vx: 0, vy: 3.2, minY: 80, maxY: 520 }], traps: [{ x: 330, y: 300, w: 36, h: 36 }, { x: 540, y: 110, w: 36, h: 36 }, { x: 820, y: 390, w: 36, h: 36 }], exit: { x: 900, y: 540 } }
+  { name: 'Network Login', mission: 'Collect 2 security keys and reach the secure uplink.', hint: 'Tip: Cross only after malware passes your lane.', playerSpeed: 3.4, start: { x: 42, y: 42 }, required: 2, walls: [{ x: 250, y: 80, w: 20, h: 420 }], collectibles: [{ x: 130, y: 110 }, { x: 820, y: 500 }], enemies: [{ x: 640, y: 140, r: 13, vx: 0, vy: 1.25, minY: 100, maxY: 520 }], traps: [], exit: { x: 900, y: 540 } },
+  { name: 'Malware Maze', mission: 'Collect 3 patches through guarded channels.', hint: 'Tip: Wait for patrol windows before committing to corridors.', playerSpeed: 3.35, start: { x: 35, y: 35 }, required: 3, walls: [{ x: 140, y: 60, w: 20, h: 500 }, { x: 320, y: 0, w: 20, h: 380 }, { x: 500, y: 220, w: 20, h: 380 }, { x: 680, y: 0, w: 20, h: 360 }], collectibles: [{ x: 80, y: 530 }, { x: 430, y: 110 }, { x: 860, y: 120 }], enemies: [{ x: 230, y: 470, r: 13, vx: 1.9, vy: 0, minX: 170, maxX: 620 }, { x: 850, y: 360, r: 13, vx: 0, vy: 2.05, minY: 90, maxY: 520 }], traps: [], exit: { x: 900, y: 40 } },
+  { name: 'Phishing Storm', mission: 'Avoid trap nodes and collect 3 safe packets.', hint: 'Tip: Traps are static—route around them and bait moving malware.', playerSpeed: 3.35, start: { x: 50, y: 520 }, required: 3, walls: [{ x: 240, y: 0, w: 20, h: 350 }, { x: 470, y: 250, w: 20, h: 350 }, { x: 720, y: 0, w: 20, h: 360 }], collectibles: [{ x: 90, y: 90 }, { x: 550, y: 100 }, { x: 860, y: 520 }], enemies: [{ x: 610, y: 520, r: 13, vx: 2.35, vy: 0, minX: 500, maxX: 900 }, { x: 860, y: 120, r: 13, vx: 0, vy: 2.45, minY: 80, maxY: 500 }], traps: [{ x: 330, y: 430, w: 36, h: 36 }, { x: 580, y: 300, w: 36, h: 36 }, { x: 780, y: 430, w: 36, h: 36 }], exit: { x: 902, y: 42 } },
+  { name: 'Patch Rush', mission: 'High pressure zone: collect 4 assets quickly.', hint: 'Tip: Keep moving and cut through only after vertical threats pass.', playerSpeed: 3.45, start: { x: 35, y: 300 }, required: 4, walls: [{ x: 170, y: 0, w: 20, h: 410 }, { x: 360, y: 170, w: 20, h: 430 }, { x: 560, y: 0, w: 20, h: 380 }, { x: 760, y: 180, w: 20, h: 420 }], collectibles: [{ x: 90, y: 70 }, { x: 300, y: 520 }, { x: 630, y: 120 }, { x: 880, y: 500 }], enemies: [{ x: 270, y: 130, r: 13, vx: 2.55, vy: 0, minX: 210, maxX: 520 }, { x: 660, y: 510, r: 13, vx: 0, vy: -2.65, minY: 240, maxY: 550 }, { x: 890, y: 100, r: 13, vx: 0, vy: 2.85, minY: 60, maxY: 520 }], traps: [{ x: 430, y: 100, w: 36, h: 36 }], exit: { x: 905, y: 45 } },
+  { name: 'Core Lockdown', mission: 'Final sector: collect 4 assets and secure the network core.', hint: 'Tip: Reset in top/bottom lanes, then challenge the center.', playerSpeed: 3.45, start: { x: 40, y: 40 }, required: 4, walls: [{ x: 120, y: 0, w: 20, h: 340 }, { x: 280, y: 200, w: 20, h: 390 }, { x: 440, y: 0, w: 20, h: 330 }, { x: 600, y: 210, w: 20, h: 380 }, { x: 760, y: 0, w: 20, h: 320 }], collectibles: [{ x: 80, y: 520 }, { x: 360, y: 100 }, { x: 680, y: 500 }, { x: 890, y: 130 }], enemies: [{ x: 210, y: 520, r: 13, vx: 2.65, vy: 0, minX: 150, maxX: 420 }, { x: 520, y: 80, r: 13, vx: -2.75, vy: 0, minX: 460, maxX: 900 }, { x: 870, y: 520, r: 13, vx: 0, vy: -2.9, minY: 250, maxY: 550 }, { x: 900, y: 150, r: 13, vx: 0, vy: 3.0, minY: 80, maxY: 520 }], traps: [{ x: 340, y: 300, w: 36, h: 36 }, { x: 540, y: 120, w: 36, h: 36 }, { x: 820, y: 390, w: 36, h: 36 }], exit: { x: 900, y: 540 } }
 ];
 
 const rectHit = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
@@ -49,7 +49,7 @@ function spawnPickupBurst(x, y, color) {
 
 function loadLevel() {
   const lv = levels[state.levelIndex];
-  state.player = { x: lv.start.x, y: lv.start.y, w: 24, h: 24, speed: 3.2, collected: 0 };
+  state.player = { x: lv.start.x, y: lv.start.y, w: 24, h: 24, speed: lv.playerSpeed ?? 3.2, collected: 0 };
   state.collectibles = lv.collectibles.map(c => ({ x: c.x, y: c.y, w: 16, h: 16, type: Math.random() > 0.5 ? 'chip' : 'key' }));
   state.enemies = lv.enemies.map(e => ({ ...e }));
   state.traps = lv.traps.map(t => ({ ...t }));
@@ -60,16 +60,18 @@ function loadLevel() {
 function updateHud() {
   const lv = levels[state.levelIndex];
   hud.level.textContent = state.levelIndex + 1;
-  hud.levelName.textContent = `${lv.name} — ${lv.mission}`;
+  hud.levelName.textContent = `${lv.name} — ${lv.mission} ${lv.hint || ''}`;
   hud.lives.textContent = '❤'.repeat(state.lives).padEnd(3, '·');
   hud.score.textContent = state.score;
   hud.items.textContent = `${state.player.collected}/${lv.required}`;
 }
 
 function loseLife() {
+  if (state.damageCooldown > 0) return;
   state.lives -= 1;
   state.player.x = levels[state.levelIndex].start.x;
   state.player.y = levels[state.levelIndex].start.y;
+  state.damageCooldown = 36;
   state.hitPulse = 16;
   canvas.classList.remove('damage-flash'); void canvas.offsetWidth; canvas.classList.add('damage-flash');
   tone(160, 0.13);
@@ -83,6 +85,7 @@ function loseLife() {
 function update() {
   frame += 1;
   const p = state.player;
+  if (state.damageCooldown > 0) state.damageCooldown -= 1;
   const lv = levels[state.levelIndex];
   const dx = ((keys.d || keys.arrowright) ? 1 : 0) - ((keys.a || keys.arrowleft) ? 1 : 0);
   const dy = ((keys.s || keys.arrowdown) ? 1 : 0) - ((keys.w || keys.arrowup) ? 1 : 0);
