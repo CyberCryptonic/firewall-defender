@@ -31,12 +31,20 @@ body.start-mode .app-shell {
 }
 
 body.start-mode main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
 }
 
 body.start-mode .title-panel,
 body.start-mode #startScreen {
   width: min(100%, 920px);
+}
+
+body.start-mode #startScreen {
+  margin-left: auto;
+  margin-right: auto;
 }
 .glass { backdrop-filter: blur(9px); background: var(--panel); border: 1px solid var(--line); box-shadow: 0 0 28px rgba(57,181,255,.18), inset 0 0 24px rgba(57,181,255,.04); border-radius: 16px; }
 .title-panel { text-align: center; padding: 18px 18px 14px; margin-bottom: 14px; }
